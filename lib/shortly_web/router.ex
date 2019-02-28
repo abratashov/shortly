@@ -16,6 +16,8 @@ defmodule ShortlyWeb.Router do
   scope "/", ShortlyWeb do
     pipe_through :browser
 
+    resources "/links", LinkController
+
     get "/", PageController, :index
   end
 

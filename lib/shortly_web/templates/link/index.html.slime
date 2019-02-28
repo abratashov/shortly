@@ -1,0 +1,21 @@
+h2 Listing Links
+
+table.table
+  thead
+    tr
+      th Url
+      th Short url
+      th
+  tbody
+    = for link <- @links do
+      tr
+        td= link.url
+        td= link.short_url
+        td class="text-right"
+          = link "Show", to: link_path(@conn, :show, link), class: "btn btn-default btn-xs"
+          | &nbsp;
+          = link "Edit", to: link_path(@conn, :edit, link), class: "btn btn-default btn-xs"
+          | &nbsp;
+          = link "Delete", to: link_path(@conn, :delete, link), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs"
+
+= link "New Link", to: link_path(@conn, :new)
