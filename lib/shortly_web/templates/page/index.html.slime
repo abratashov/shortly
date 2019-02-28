@@ -1,0 +1,3 @@
+section.phx-hero
+  h1= gettext "Welcome to %{name}!", name: "Shortly Service"
+  p for making the URLs simpler
