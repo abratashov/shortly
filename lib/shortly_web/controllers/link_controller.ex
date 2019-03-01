@@ -6,6 +6,11 @@ defmodule ShortlyWeb.LinkController do
 
   import ShortlyWeb.Router.Helpers
 
+  @env Mix.env()
+  plug BasicAuth,
+       [use_config: {:shortly, :http_auth_config}]
+       when not (action in [:create]) and @env not in [:test]
+
   def index(conn, _params) do
     links = App.list_links()
     render(conn, "index.html", links: links)
