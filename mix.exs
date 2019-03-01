@@ -52,7 +52,8 @@ defmodule Shortly.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:phoenix_slime, "~> 0.12.0"},
       {:basic_auth, ">= 2.2.2"},
-      {:excoveralls, "~> 0.10", only: :test}
+      {:excoveralls, "~> 0.10", only: :test},
+      {:wallaby, "~> 0.22.0", runtime: false, only: :test}
     ]
   end
 

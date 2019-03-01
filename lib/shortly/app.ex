@@ -40,7 +40,8 @@ defmodule Shortly.App do
 
   """
   def get_link!(id), do: Repo.get!(Link, id)
-  def get_link_by_url!(short_url), do: Repo.get_by!(Link, short_url: short_url)
+  def get_link_by_url!(url), do: Repo.get_by!(Link, url: url)
+  def get_link_by_short_url!(short_url), do: Repo.get_by!(Link, short_url: short_url)
 
   @doc """
   Creates a link.

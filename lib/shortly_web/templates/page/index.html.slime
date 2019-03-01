@@ -23,6 +23,6 @@ section.centered
       = for link <- @links do
         tr
           td
-            a href="#{link.url}" #{link.url}
+            a.origin-link href="#{link.url}" #{link.url}
           td
-            a href="#{full_short_url(link.short_url)}" #{full_short_url(link.short_url)}
+            a.short-link href="#{full_short_url(link.short_url)}" #{full_short_url(link.short_url)}

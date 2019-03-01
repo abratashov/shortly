@@ -4,7 +4,9 @@ use Mix.Config
 # you can enable the server option below.
 config :shortly, ShortlyWeb.Endpoint,
   http: [port: 4002],
-  server: false
+  server: true
+
+config :shortly, :sql_sandbox, true
 
 # Print only warnings and errors during test
 config :logger, level: :warn
@@ -16,3 +18,5 @@ config :shortly, Shortly.Repo,
   database: "shortly_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
+
+config :shortly, base_url: "http://localhost:4002"

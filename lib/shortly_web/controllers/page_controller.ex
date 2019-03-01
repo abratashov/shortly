@@ -15,7 +15,7 @@ defmodule ShortlyWeb.PageController do
   end
 
   def show(conn, %{"short_url" => short_url}) do
-    link = App.get_link_by_url!(short_url)
+    link = App.get_link_by_short_url!(short_url)
 
     if link do
       redirect(conn, external: link.url)

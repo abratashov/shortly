@@ -31,7 +31,6 @@ config :phoenix, :template_engines,
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
-import_config "#{Mix.env()}.exs"
 
 config :shortly,
   http_auth_config: [
@@ -41,3 +40,5 @@ config :shortly,
   ]
 
 config :shortly, base_url: "http://localhost:4000"
+
+import_config "#{Mix.env()}.exs"
