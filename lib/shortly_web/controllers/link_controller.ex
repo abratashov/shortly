@@ -6,6 +6,8 @@ defmodule ShortlyWeb.LinkController do
 
   import ShortlyWeb.Router.Helpers
 
+  @base_url Application.get_env(:shortly, :base_url)
+
   @env Mix.env()
   plug BasicAuth,
        [use_config: {:shortly, :http_auth_config}]
@@ -26,7 +28,7 @@ defmodule ShortlyWeb.LinkController do
       {:ok, link} ->
         conn
         |> put_flash(:info, "Link created successfully.")
-        |> redirect(to: link_path(conn, :show, link))
+        |> redirect(to: redirection_path(conn, link))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
@@ -65,5 +67,15 @@ defmodule ShortlyWeb.LinkController do
     conn
     |> put_flash(:info, "Link deleted successfully.")
     |> redirect(to: link_path(conn, :index))
+  end
+
+  defp redirection_path(conn, link) do
+    referer = get_req_header(conn, "referer") |> Enum.at(0)
+
+    if referer == "#{@base_url}/" do
+      page_path(conn, :index)
+    else
+      link_path(conn, :show, link)
+    end
   end
 end

@@ -1,3 +1,28 @@
 section.phx-hero
   h1= gettext "Welcome to %{name}!", name: "Shortly Service"
   p for making the URLs simpler
+
+section.centered
+  = form_for @changeset, @action, fn f ->
+    = if @changeset.action do
+      .alert.alert-danger
+        p Oops, something went wrong! Please check the errors below.
+    .form-group
+      label.control-label for="link_url" Put full URL here:
+      = text_input f, :url, class: "form-control"
+      = error_tag f, :url
+    .form-group
+      = submit "Shorten", class: "btn btn-primary"
+
+  table.table
+    thead
+      tr
+        th
+        th
+    tbody
+      = for link <- @links do
+        tr
+          td
+            a href="#{link.url}" #{link.url}
+          td
+            a href="#{full_short_url(link.short_url)}" #{full_short_url(link.short_url)}

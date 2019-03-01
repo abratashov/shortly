@@ -52,6 +52,7 @@ defmodule Shortly.App do
   def create_link(attrs \\ %{}) do
     %Link{}
     |> Link.changeset(attrs)
+    |> Link.put_short_url()
     |> Repo.insert()
   end
 

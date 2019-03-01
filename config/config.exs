@@ -39,3 +39,5 @@ config :shortly,
     password: "pass",
     realm: "Admin Area"
   ]
+
+config :shortly, base_url: "http://localhost:4000"
