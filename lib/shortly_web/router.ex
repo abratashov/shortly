@@ -19,6 +19,7 @@ defmodule ShortlyWeb.Router do
     resources "/links", LinkController
 
     get "/", PageController, :index
+    get "/:short_url", PageController, :show
   end
 
   # Other scopes may use custom stacks.

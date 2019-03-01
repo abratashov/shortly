@@ -10,7 +10,17 @@ defmodule ShortlyWeb.PageController do
     render(conn, "index.html",
       changeset: App.change_link(%Link{}),
       action: link_path(conn, :create),
-      links: App.list_links()
+      links: App.last_1000_links()
     )
+  end
+
+  def show(conn, %{"short_url" => short_url}) do
+    link = App.get_link_by_url!(short_url)
+
+    if link do
+      redirect(conn, external: link.url)
+    else
+      redirect(conn, to: page_path(conn, :index))
+    end
   end
 end

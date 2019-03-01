@@ -21,6 +21,10 @@ defmodule Shortly.App do
     Repo.all(Link)
   end
 
+  def last_1000_links do
+    Link |> order_by(desc: :id) |> limit(100) |> Repo.all()
+  end
+
   @doc """
   Gets a single link.
 
@@ -36,6 +40,7 @@ defmodule Shortly.App do
 
   """
   def get_link!(id), do: Repo.get!(Link, id)
+  def get_link_by_url!(short_url), do: Repo.get_by!(Link, short_url: short_url)
 
   @doc """
   Creates a link.
