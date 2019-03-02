@@ -6,11 +6,12 @@ defmodule ShortlyWeb.PageController do
 
   import ShortlyWeb.Router.Helpers
 
-  def index(conn, _params) do
+  def index(conn, params) do
     render(conn, "index.html",
       changeset: App.change_link(%Link{}),
       action: link_path(conn, :create),
-      links: App.last_1000_links()
+      links: App.last_1000_links(),
+      created_link: created_link(params)
     )
   end
 
@@ -21,6 +22,12 @@ defmodule ShortlyWeb.PageController do
       redirect(conn, external: link.url)
     else
       redirect(conn, to: page_path(conn, :index))
+    end
+  end
+
+  defp created_link(params) do
+    if params["created_link"] do
+      App.get_link!(params["created_link"])
     end
   end
 end

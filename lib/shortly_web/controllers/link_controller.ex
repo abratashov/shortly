@@ -70,12 +70,17 @@ defmodule ShortlyWeb.LinkController do
   end
 
   defp redirection_path(conn, link) do
-    referer = get_req_header(conn, "referer") |> Enum.at(0)
-
-    if referer == "#{@base_url}/" do
-      page_path(conn, :index)
+    if main_page_referer?(conn) do
+      page_path(conn, :index, created_link: link)
     else
       link_path(conn, :show, link)
     end
+  end
+
+  defp main_page_referer?(conn) do
+    referer = get_req_header(conn, "referer") |> Enum.at(0)
+
+    referer == "#{@base_url}/" ||
+      Regex.match?(~r/#{@base_url}\/\?created_link=/, referer)
   end
 end

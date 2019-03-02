@@ -1,6 +1,11 @@
 section.phx-hero
   h1= gettext "Welcome to %{name}!", name: "Shortly Service"
   p for making the URLs simpler
+  = if @created_link do
+    .form-group
+      a.short-link href="#{full_short_url(@created_link.short_url)}" #{full_short_url(@created_link.short_url)}
+      span &nbsp; => &nbsp;
+      a.origin-link href="#{@created_link.url}" #{@created_link.url}
 
 section.centered
   = form_for @changeset, @action, fn f ->
@@ -17,8 +22,8 @@ section.centered
   table.table
     thead
       tr
-        th
-        th
+        th URL
+        th Short URL
     tbody
       = for link <- @links do
         tr
