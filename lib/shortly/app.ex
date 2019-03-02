@@ -62,6 +62,15 @@ defmodule Shortly.App do
     |> Repo.insert()
   end
 
+  def create_or_find_link(attrs \\ %{}) do
+    link =
+      if is_nil(attrs["url"]),
+        do: nil,
+        else: Repo.get_by(Link, url: attrs["url"])
+
+    if link, do: {:ok, link}, else: create_link(attrs)
+  end
+
   @doc """
   Updates a link.
 

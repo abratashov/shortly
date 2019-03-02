@@ -24,7 +24,7 @@ defmodule ShortlyWeb.LinkController do
   end
 
   def create(conn, %{"link" => link_params}) do
-    case App.create_link(link_params) do
+    case App.create_or_find_link(link_params) do
       {:ok, link} ->
         conn
         |> put_flash(:info, "Link created successfully.")
@@ -81,6 +81,6 @@ defmodule ShortlyWeb.LinkController do
     referer = get_req_header(conn, "referer") |> Enum.at(0)
 
     referer == "#{@base_url}/" ||
-      Regex.match?(~r/#{@base_url}\/\?created_link=/, referer)
+      Regex.match?(~r/#{@base_url}\/\?created_link=/, "#{referer}")
   end
 end
