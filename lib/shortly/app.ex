@@ -4,8 +4,8 @@ defmodule Shortly.App do
   """
 
   import Ecto.Query, warn: false
-  alias Shortly.Repo
 
+  alias Shortly.Repo
   alias Shortly.App.Link
 
   @doc """

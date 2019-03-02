@@ -2,6 +2,8 @@ defmodule Shortly.App.Link do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias Shortly.App.UrlGenerator
+
   schema "links" do
     field :short_url, :string
     field :url, :string
@@ -21,20 +23,7 @@ defmodule Shortly.App.Link do
       changeset
     else
       changeset
-      |> put_change(:short_url, generated_url())
+      |> put_change(:short_url, UrlGenerator.uniq_url())
     end
-  end
-
-  defp generated_url do
-    n = 5
-
-    chars =
-      "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" |> String.codepoints()
-
-    black_list = ~w{1 l I 0 O}
-    allowed_chars = chars -- black_list
-
-    for(_ <- 1..n, do: allowed_chars |> Enum.random())
-    |> Enum.join()
   end
 end
