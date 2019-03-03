@@ -53,7 +53,8 @@ defmodule Shortly.MixProject do
       {:phoenix_slime, "~> 0.12.0"},
       {:basic_auth, ">= 2.2.2"},
       {:excoveralls, "~> 0.10", only: :test},
-      {:wallaby, "~> 0.22.0", runtime: false, only: :test}
+      {:wallaby, "~> 0.22.0", runtime: false, only: :test},
+      {:ex_mock, "~> 0.1.1", only: :test}
     ]
   end
 

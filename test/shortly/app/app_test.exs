@@ -10,7 +10,7 @@ defmodule Shortly.AppTest do
     @new_url "http://www.google.com.ua"
     @valid_attrs %{short_url: "some short_url", url: @url}
     @update_attrs %{short_url: "some updated short_url", url: @new_url}
-    @invalid_attrs %{short_url: nil, url: nil}
+    @invalid_attrs %{short_url: nil, url: "invalid-url"}
 
     def link_fixture(attrs \\ %{}) do
       {:ok, link} =
