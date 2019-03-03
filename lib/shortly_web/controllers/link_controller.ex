@@ -31,7 +31,7 @@ defmodule ShortlyWeb.LinkController do
         |> redirect(to: redirection_path(conn, link))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        render_error_creation(conn, changeset)
     end
   end
 
@@ -82,5 +82,22 @@ defmodule ShortlyWeb.LinkController do
 
     referer == "#{@base_url}/" ||
       Regex.match?(~r/#{@base_url}\/\?created_link=/, "#{referer}")
+  end
+
+  defp render_error_creation(conn, %Ecto.Changeset{} = changeset) do
+    if main_page_referer?(conn) do
+      conn
+      |> put_flash(:info, errors_of(changeset))
+      |> redirect(to: page_path(conn, :index))
+    else
+      render(conn, "new.html", changeset: changeset)
+    end
+  end
+
+  defp errors_of(changeset) do
+    Enum.reduce(changeset.errors, [], fn {_, {message, _}}, messages ->
+      messages ++ [message]
+    end)
+    |> Enum.join(". ")
   end
 end

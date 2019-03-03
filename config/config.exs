@@ -40,5 +40,6 @@ config :shortly,
   ]
 
 config :shortly, base_url: "http://localhost:4000"
+config :shortly, base_host: "localhost:4000"
 
 import_config "#{Mix.env()}.exs"

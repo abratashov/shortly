@@ -6,8 +6,10 @@ defmodule Shortly.AppTest do
   describe "links" do
     alias Shortly.App.Link
 
-    @valid_attrs %{short_url: "some short_url", url: "some url"}
-    @update_attrs %{short_url: "some updated short_url", url: "some updated url"}
+    @url "http://www.google.com"
+    @new_url "http://www.google.com.ua"
+    @valid_attrs %{short_url: "some short_url", url: @url}
+    @update_attrs %{short_url: "some updated short_url", url: @new_url}
     @invalid_attrs %{short_url: nil, url: nil}
 
     def link_fixture(attrs \\ %{}) do
@@ -32,7 +34,7 @@ defmodule Shortly.AppTest do
     test "create_link/1 with valid data creates a link" do
       assert {:ok, %Link{} = link} = App.create_link(@valid_attrs)
       assert link.short_url == "some short_url"
-      assert link.url == "some url"
+      assert link.url == @url
     end
 
     test "create_link/1 with invalid data returns error changeset" do
@@ -43,7 +45,7 @@ defmodule Shortly.AppTest do
       link = link_fixture()
       assert {:ok, %Link{} = link} = App.update_link(link, @update_attrs)
       assert link.short_url == "some updated short_url"
-      assert link.url == "some updated url"
+      assert link.url == @new_url
     end
 
     test "update_link/2 with invalid data returns error changeset" do

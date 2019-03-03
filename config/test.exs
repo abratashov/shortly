@@ -20,3 +20,4 @@ config :shortly, Shortly.Repo,
   pool: Ecto.Adapters.SQL.Sandbox
 
 config :shortly, base_url: "http://localhost:4002"
+config :shortly, base_host: "localhost:4002"

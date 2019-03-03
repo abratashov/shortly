@@ -5,8 +5,11 @@ defmodule ShortlyWeb.LinkControllerTest do
 
   import ShortlyWeb.Router.Helpers
 
-  @create_attrs %{short_url: "some short_url", url: "some url"}
-  @update_attrs %{short_url: "some updated short_url", url: "some updated url"}
+  @url "http://www.google.com"
+  @new_url "http://www.google.com.ua"
+
+  @create_attrs %{short_url: "some short_url", url: @url}
+  @update_attrs %{short_url: "some updated short_url", url: @new_url}
   @invalid_attrs %{short_url: nil, url: nil}
 
   def fixture(:link) do
@@ -62,7 +65,7 @@ defmodule ShortlyWeb.LinkControllerTest do
       assert redirected_to(conn) == link_path(conn, :show, link)
 
       conn = get(conn, link_path(conn, :show, link))
-      assert html_response(conn, 200) =~ "some updated short_url"
+      assert html_response(conn, 200) =~ @new_url
     end
 
     test "renders errors when data is invalid", %{conn: conn, link: link} do

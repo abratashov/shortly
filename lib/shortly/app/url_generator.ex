@@ -9,7 +9,7 @@ defmodule Shortly.App.UrlGenerator do
   @max_length 20
 
   def uniq_url(attempt \\ 1) do
-    url = random_url
+    url = random_url()
     link = Repo.get_by(Link, short_url: url)
     if link && attempt < @max_attempts, do: uniq_url(attempt + 1), else: url
   end
@@ -31,7 +31,7 @@ defmodule Shortly.App.UrlGenerator do
   end
 
   defp min_length(@max_length, _, _, _), do: @max_length
-  defp min_length(n, amount, capacity, db_count) when capacity > db_count, do: n
+  defp min_length(n, _, capacity, db_count) when capacity > db_count, do: n
 
   defp min_length(n, amount, capacity, db_count),
     do: min_length(n + 1, amount, capacity * amount, db_count)
